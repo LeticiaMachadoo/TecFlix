@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
 
-function CadastroCategoria() {
+function Cadastrocategory() {
   const initialValues = {
-    categoryName: '',
+    title: '',
     description: '',
     color: '',
   };
@@ -14,10 +14,10 @@ function CadastroCategoria() {
   const [values, setValues] = useState(initialValues);
 
   function setValue(chave, valor) {
-    // chave: categoryName, description, bla, bli
+    // chave: title, description, bla, bli
     setValues({
       ...values,
-      [chave]: valor, // categoryName: 'valor'
+      [chave]: valor, // title: 'valor'
     });
   }
 
@@ -35,6 +35,7 @@ function CadastroCategoria() {
         : 'https://tecflix-project.herokuapp.com/categories';
       fetch(URL)
         .then(async (response) => {
+          console.log('response: ', response);
           if (response.ok) {
             const resp = await response.json();
             setCategory(resp);
@@ -48,8 +49,8 @@ function CadastroCategoria() {
   return (
     <PageDefault>
       <h1>
-        Cadastro de Categoria:
-        {values.categoryName}
+        Cadastro de category:
+        {values.title}
       </h1>
 
       <form onSubmit={function handleSubmit(infosDoEvento) {
@@ -64,10 +65,10 @@ function CadastroCategoria() {
       >
 
         <FormField
-          label="Nome da Categoria"
+          label="Nome da category"
           type="text"
-          name="categoryName"
-          value={values.categoryName}
+          name="title"
+          value={values.title}
           onChange={handleChange}
         />
 
@@ -91,9 +92,10 @@ function CadastroCategoria() {
       </form>
 
       <ul>
-        {category.map((categoria) => (
-          <li key={categoria.id}>
-            {categoria.title}
+        {category.map((cat) => (
+          <li key={cat.id}>
+          {console.log('cat: ', cat)}
+            {cat.title}
           </li>
         ))}
       </ul>
@@ -105,4 +107,4 @@ function CadastroCategoria() {
   );
 }
 
-export default CadastroCategoria;
+export default Cadastrocategory;
