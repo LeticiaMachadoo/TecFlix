@@ -31,8 +31,8 @@ function CadastroCategoria() {
   useEffect(() => {
     if (window.location.href.includes('localhost')) {
       const URL = window.location.hostname.includes('localhost')
-        ? 'http://localhost:8080/categorias'
-        : 'https://tecflix-project.herokuapp.com/categorias';
+        ? 'http://localhost:8080/categories'
+        : 'https://tecflix-project.herokuapp.com/categories';
       fetch(URL)
         .then(async (response) => {
           if (response.ok) {
@@ -56,11 +56,12 @@ function CadastroCategoria() {
         infosDoEvento.preventDefault();
         setCategory([
           ...category,
-          values
+          values,
         ]);
 
-        setValues(initialValues)
-      }}>
+        setValues(initialValues);
+      }}
+      >
 
         <FormField
           label="Nome da Categoria"
@@ -85,18 +86,16 @@ function CadastroCategoria() {
           value={values.color}
           onChange={handleChange}
         />
-        <button> Cadastrar  </button>
+        {/* eslint-disable-next-line react/button-has-type */}
+        <button>Cadastrar</button>
       </form>
 
-
       <ul>
-        {category.map((categoria, indice) => {
-          return (
-            <li key={`${categoria}${indice}`}>
-              {categoria.categoryName}
-            </li>
-          );
-        })}
+        {category.map((categoria) => (
+          <li key={categoria.id}>
+            {categoria.title}
+          </li>
+        ))}
       </ul>
 
       <Link to="/">
